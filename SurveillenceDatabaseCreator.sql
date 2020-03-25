@@ -28,7 +28,8 @@ GO
 CREATE TABLE [dbo].[Cameras](
 	[cameraId] [int] IDENTITY(1,1) NOT NULL,
 	[provinceId] [int] NULL,
-	[co-ordinate] [varchar](100) NULL,
+	[latitude] [decimal](9,6) NULL,
+	[longitude] [decimal](9,6) NULL,
 	[lastMaintenceDate] [datetime] NULL,
 );
 GO
@@ -41,13 +42,13 @@ GO
 
 --CITIZENS TABLE
 CREATE TABLE [dbo].[Citizens](
-	[citizenId] [int] IDENTITY(1,1) NOT NULL,
-	[firstName] [varchar](100) NULL,
-	[lastName] [varchar](100) NULL,
-	[dateOfBirth] [date] NULL,
-	[gender] [varchar](200) NULL,
-	[provinceId] [int] NULL,
-	[occupationId] [int] NULL,
+	[citizenId] [bigint] NOT NULL,
+	[firstName] [varchar](100) NOT NULL,
+	[lastName] [varchar](100) NOT NULL,
+	[dateOfBirth] [date] NOT NULL,
+	[gender] [varchar](200) NOT NULL,
+	[provinceId] [int] NOT NULL,
+	[occupationId] [int] NOT NULL,
 	[addressLine1] [varchar](200) NULL,
 	[addressLine2] [varchar](200) NULL,
 	[addressLine3] [varchar](200) NULL
@@ -62,9 +63,9 @@ ADD CONSTRAINT [PK_citizenId] PRIMARY KEY CLUSTERED ([citizenId] ASC)
 --OCCUPATIONS TABLE
 CREATE TABLE [dbo].[Occupations](
 	[occupationId] [int] IDENTITY(1,1) NOT NULL,
-	[occupationName] [varchar](1000) NULL,
+	[occupationName] [varchar](1000) NOT NULL,
 	[occupationDescription] [varchar](1000) NULL,
-	[importance] [float] NULL,
+	[importance] [float] NOT NULL,
 );
 GO
 
@@ -75,9 +76,9 @@ GO
 --ACTIONS TABLE
 CREATE TABLE [dbo].[Actions](
 	[actionId] [int] IDENTITY(1,1) NOT NULL,
-	[actionName] [varchar](1000) NULL,
+	[actionName] [varchar](1000) NOT NULL,
 	[actionDescription] [varchar](1000) NULL,
-	[score] [float] NULL,
+	[score] [float] NOT NULL,
 );
 GO
 
@@ -87,12 +88,12 @@ GO
 
 --ACTIONS LOG TABLE
 CREATE TABLE [dbo].[ActionsLog](
-	[citizenId] [int] NULL,
-	[actionId] [int] NULL,
-	[provinceId] [int] NULL,
-	[cameraId] [int] NULL,
-	[accuracy] [float] NULL,
-	[occurenceTime] [dateTime] NULL
+	[citizenId] [bigint] NOT NULL,
+	[actionId] [int] NOT NULL,
+	[provinceId] [int] NOT NULL,
+	[cameraId] [int] NOT NULL,
+	[accuracy] [float] NOT NULL,
+	[occurenceTime] [dateTime] NOT NULL
 );
 GO
 
@@ -126,7 +127,6 @@ ALTER TABLE [dbo].ActionsLog
 	  CONSTRAINT FK_actionLog_cameraId FOREIGN KEY (cameraId)
       REFERENCES Cameras (cameraId)
 ;
-
 GO
 
 --MOCK PROVINCE DATA
@@ -141,12 +141,28 @@ INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Slimp'
 GO
 
 --MOCK CAMERA DATA
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), N'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (2,convert(datetime,'21-02-12 6:10:00 PM',5), 'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (3,CURRENT_TIMESTAMP, 'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (2,CURRENT_TIMESTAMP, 'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (1,CURRENT_TIMESTAMP, 'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (5,CURRENT_TIMESTAMP, 'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (6,CURRENT_TIMESTAMP, 'mock')
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [co-ordinate]) VALUES (7,CURRENT_TIMESTAMP, 'mock')
+INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [latitude],[longitude]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), 32.5, 32.5)
+INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [latitude], [longitude]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), 32.6, 32.7)
+GO
+
+--MOCK OCCUPATION DATA
+INSERT [dbo].[Occupations] ([occupationName]
+	,[occupationDescription]
+	,[importance]) VALUES ('Software Developer', 'Develops programs for the great state of Jumpong', 10)
+
+GO
+
+--MOCK PERSON DATA
+INSERT [dbo].[Citizens]([citizenId],
+	[firstName],
+	[lastName],
+	[dateOfBirth],
+	[gender],
+	[provinceId],
+	[occupationId],
+	[addressLine1],
+	[addressLine2],
+	[addressLine3]) 
+	VALUES 
+	(8928282818, 'Keanu', 'Teixeira', '1996-07-09', 'male', 3, 1, '12', '6th Street', 'Bloom')
 GO
