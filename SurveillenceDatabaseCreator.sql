@@ -9,14 +9,14 @@ GO
 
 USE SurveillenceDB;
 GO
---
+----------------------------------
 
 --PROVINCES TABLE
 CREATE TABLE [dbo].[Provinces](
-    [provinceId] [int] IDENTITY(1,1) NOT NULL,
-	[provinceName] [varchar](100) NULL,
-	[size] [float] NULL,
-    [population] [int] NULL,
+    [provinceId] int IDENTITY(1,1) NOT NULL,
+	[provinceName] varchar(100) NOT NULL,
+	[size] float NOT NULL,
+    [population] int NULL,
 );
 GO
 
@@ -26,11 +26,11 @@ GO
 
 --CAMERAS TABLE
 CREATE TABLE [dbo].[Cameras](
-	[cameraId] [int] IDENTITY(1,1) NOT NULL,
-	[provinceId] [int] NULL,
-	[latitude] [decimal](9,6) NULL,
-	[longitude] [decimal](9,6) NULL,
-	[lastMaintenceDate] [datetime] NULL,
+	[cameraId] int IDENTITY(1,1) NOT NULL,
+	[provinceId] int NULL,
+	[latitude] decimal(9,6) NULL,
+	[longitude] decimal(9,6) NULL,
+	[lastMaintenceDate] datetime NULL,
 );
 GO
 
@@ -42,16 +42,16 @@ GO
 
 --CITIZENS TABLE
 CREATE TABLE [dbo].[Citizens](
-	[citizenId] [bigint] NOT NULL,
-	[firstName] [varchar](100) NOT NULL,
-	[lastName] [varchar](100) NOT NULL,
-	[dateOfBirth] [date] NOT NULL,
-	[gender] [varchar](200) NOT NULL,
-	[provinceId] [int] NOT NULL,
-	[occupationId] [int] NOT NULL,
-	[addressLine1] [varchar](200) NULL,
-	[addressLine2] [varchar](200) NULL,
-	[addressLine3] [varchar](200) NULL
+	[citizenId] bigint NOT NULL,
+	[firstName] varchar(100) NOT NULL,
+	[lastName] varchar(100) NOT NULL,
+	[dateOfBirth] date NOT NULL,
+	[gender] varchar(200) NOT NULL,
+	[provinceId] int NOT NULL,
+	[occupationId] int NOT NULL,
+	[addressLine1] varchar(200) NULL,
+	[addressLine2] varchar(200) NULL,
+	[addressLine3] varchar(200) NULL,
 );
 GO
 
@@ -62,10 +62,10 @@ ADD CONSTRAINT [PK_citizenId] PRIMARY KEY CLUSTERED ([citizenId] ASC)
 
 --OCCUPATIONS TABLE
 CREATE TABLE [dbo].[Occupations](
-	[occupationId] [int] IDENTITY(1,1) NOT NULL,
-	[occupationName] [varchar](1000) NOT NULL,
-	[occupationDescription] [varchar](1000) NULL,
-	[importance] [float] NOT NULL,
+	[occupationId] int IDENTITY(1,1) NOT NULL,
+	[occupationName] varchar(1000) NOT NULL,
+	[occupationDescription] varchar(1000) NULL,
+	[importance] float NOT NULL,
 );
 GO
 
@@ -75,10 +75,10 @@ GO
 
 --ACTIONS TABLE
 CREATE TABLE [dbo].[Actions](
-	[actionId] [int] IDENTITY(1,1) NOT NULL,
-	[actionName] [varchar](1000) NOT NULL,
-	[actionDescription] [varchar](1000) NULL,
-	[score] [float] NOT NULL,
+	[actionId] int IDENTITY(1,1) NOT NULL,
+	[actionName] varchar(1000) NOT NULL,
+	[actionDescription] varchar(1000) NULL,
+	[score] float NOT NULL,
 );
 GO
 
@@ -88,12 +88,12 @@ GO
 
 --ACTIONS LOG TABLE
 CREATE TABLE [dbo].[ActionsLog](
-	[citizenId] [bigint] NOT NULL,
-	[actionId] [int] NOT NULL,
-	[provinceId] [int] NOT NULL,
-	[cameraId] [int] NOT NULL,
-	[accuracy] [float] NOT NULL,
-	[occurenceTime] [dateTime] NOT NULL
+	[citizenId] bigint NOT NULL,
+	[actionId] int NOT NULL,
+	[provinceId] int NOT NULL,
+	[cameraId] int NOT NULL,
+	[accuracy] float NOT NULL,
+	[occurenceTime] dateTime NOT NULL
 );
 GO
 
@@ -165,4 +165,12 @@ INSERT [dbo].[Citizens]([citizenId],
 	[addressLine3]) 
 	VALUES 
 	(8928282818, 'Keanu', 'Teixeira', '1996-07-09', 'male', 3, 1, '12', '6th Street', 'Bloom')
+GO
+
+--MOCK ACTION DATA
+INSERT [dbo].[Actions]([actionName], [actionDescription], [score]) VALUES ('Murder', 'Straight up wiped a soul', 100)
+GO
+
+--MOCK ACTION LOG DATA 
+INSERT [dbo].[ActionsLog](citizenId, actionId, provinceId, cameraId, accuracy, occurenceTime) VALUES (8928282818, 1, 3, 1, 98.3, CURRENT_TIMESTAMP)
 GO
