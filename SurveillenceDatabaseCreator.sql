@@ -52,6 +52,7 @@ CREATE TABLE [dbo].[Citizens](
 	[addressLine1] varchar(200) NULL,
 	[addressLine2] varchar(200) NULL,
 	[addressLine3] varchar(200) NULL,
+	[score] float NULL
 );
 GO
 
@@ -162,9 +163,10 @@ INSERT [dbo].[Citizens]([citizenId],
 	[occupationId],
 	[addressLine1],
 	[addressLine2],
-	[addressLine3]) 
+	[addressLine3],
+	[score]) 
 	VALUES 
-	(8928282818, 'Keanu', 'Teixeira', '1996-07-09', 'male', 3, 1, '12', '6th Street', 'Bloom')
+	(8928282818, 'Keanu', 'Teixeira', '1996-07-09', 'male', 3, 1, '12', '6th Street', 'Bloom', 500)
 GO
 
 --MOCK ACTION DATA
