@@ -1,7 +1,6 @@
 --REMOVE DB IF IT EXISTS
 USE master
 ALTER DATABASE SurveillenceDB set single_user WITH rollback immediate
-IF EXISTS(select * from sys.databases where name='SurveillenceDB')
 DROP DATABASE SurveillenceDB
 
 CREATE DATABASE SurveillenceDB;
@@ -11,7 +10,7 @@ USE SurveillenceDB;
 GO
 ----------------------------------
 
---PROVINCES TABLE
+--DISTRICTS TABLE
 CREATE TABLE [dbo].[Districts](
     [districtId] int IDENTITY(1,1) NOT NULL,
 	[districtName] varchar(100) NOT NULL,
@@ -130,15 +129,19 @@ ALTER TABLE [dbo].ActionsLog
 ;
 GO
 
---MOCK PROVINCE DATA
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Rohun',1254)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Arcadia', 20909)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Senestra', 743)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Slum Town', 201)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Fictional City Name', 1291)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Definitely Not China', 83832)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Haven', 2029)
-INSERT [dbo].[Districts] ([districtName], [size]) VALUES (N'Slimp', 2099)
+--MOCK DISTRICT DATA
+INSERT INTO [dbo].[Districts] (districtName, size)
+    VALUES
+        ('Redlake', 4736.43),
+        ('Wellmage', 4656.88),
+        ('Riverburn', 2611.84),
+        ('Grasslyn', 1629.06),
+        ('Norcliff', 2335.32),
+        ('Aelwynne', 9056.03),
+        ('Goldcrest', 4831.25),
+        ('Woodgriffin', 7649.01),
+        ('Coldmoor', 5194.25),
+        ('Mormead', 2235.41)
 GO
 
 --MOCK CAMERA DATA
