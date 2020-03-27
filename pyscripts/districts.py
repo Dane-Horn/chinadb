@@ -23,18 +23,17 @@ district_pool = ["Eastwald",
                  "Aelwynne",
                  "Mallowwood"]
 
-
-def generateDistricts(n):
-    district_names = random.sample(district_pool, k=n)
-    district_sizes = [round(random.uniform(100.00, 10000.00), 2)
-                      for _ in range(n)]
-    entries = zip(district_names, district_sizes)
-    output = f'''INSERT INTO [dbo].[Districts] (districtName, size)
-    VALUES
-    '''
-    for entry in entries:
-        output += f'\t{entry},\n'
-    print(output[:-2])
+districts = []
 
 
-generateDistricts(10)
+def generateDistricts(n=15):
+    if len(districts) == 0:
+        district_names = random.sample(district_pool, k=n)
+        district_sizes = [round(random.uniform(100.00, 10000.00), 2)
+                          for _ in range(n)]
+        district_ids = [x for x in range(1, n+1)]
+
+        for id, name, size in zip(district_ids, district_names, district_sizes):
+            districts.append(
+                {'districtId': id, 'districtName': name, 'size': size})
+    return districts
