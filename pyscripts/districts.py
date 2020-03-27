@@ -1,6 +1,6 @@
 import random
 
-province_pool = ["Eastwald",
+district_pool = ["Eastwald",
                  "Goldcrest",
                  "Wellwick",
                  "Newby",
@@ -24,12 +24,12 @@ province_pool = ["Eastwald",
                  "Mallowwood"]
 
 
-def generateProvinces(n):
-    province_names = random.sample(province_pool, k=n)
-    province_sizes = [round(random.uniform(100.00, 10000.00), 2)
+def generateDistricts(n):
+    district_names = random.sample(district_pool, k=n)
+    district_sizes = [round(random.uniform(100.00, 10000.00), 2)
                       for _ in range(n)]
-    entries = zip(province_names, province_sizes)
-    output = f'''INSERT INTO [dbo].[Provinces] (provinceName, size)
+    entries = zip(district_names, district_sizes)
+    output = f'''INSERT INTO [dbo].[Districts] (districtName, size)
     VALUES
     '''
     for entry in entries:
@@ -37,4 +37,4 @@ def generateProvinces(n):
     print(output[:-2])
 
 
-generateProvinces(10)
+generateDistricts(10)

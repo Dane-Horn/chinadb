@@ -1,7 +1,6 @@
 --REMOVE DB IF IT EXISTS
 USE master
 ALTER DATABASE SurveillenceDB set single_user WITH rollback immediate
-IF EXISTS(select * from sys.databases where name='SurveillenceDB')
 DROP DATABASE SurveillenceDB
 
 CREATE DATABASE SurveillenceDB;
@@ -11,23 +10,23 @@ USE SurveillenceDB;
 GO
 ----------------------------------
 
---PROVINCES TABLE
-CREATE TABLE [dbo].[Provinces](
-    [provinceId] int IDENTITY(1,1) NOT NULL,
-	[provinceName] varchar(100) NOT NULL,
+--DISTRICTS TABLE
+CREATE TABLE [dbo].[Districts](
+    [districtId] int IDENTITY(1,1) NOT NULL,
+	[districtName] varchar(100) NOT NULL,
 	[size] float NOT NULL,
-    [population] int NULL,
+    [population] int DEFAULT 0,
 );
 GO
 
-ALTER TABLE dbo.Provinces
-ADD CONSTRAINT [PK_provinceId] PRIMARY KEY CLUSTERED ([provinceId] ASC);
+ALTER TABLE dbo.Districts
+ADD CONSTRAINT [PK_districtId] PRIMARY KEY CLUSTERED ([districtId] ASC);
 GO
 
 --CAMERAS TABLE
 CREATE TABLE [dbo].[Cameras](
 	[cameraId] int IDENTITY(1,1) NOT NULL,
-	[provinceId] int NULL,
+	[districtId] int NULL,
 	[latitude] decimal(9,6) NULL,
 	[longitude] decimal(9,6) NULL,
 	[lastMaintenceDate] datetime NULL,
@@ -47,7 +46,7 @@ CREATE TABLE [dbo].[Citizens](
 	[lastName] varchar(100) NOT NULL,
 	[dateOfBirth] date NOT NULL,
 	[gender] varchar(200) NOT NULL,
-	[provinceId] int NOT NULL,
+	[districtId] int NOT NULL,
 	[occupationId] int NOT NULL,
 	[addressLine1] varchar(200) NULL,
 	[addressLine2] varchar(200) NULL,
@@ -91,7 +90,7 @@ GO
 CREATE TABLE [dbo].[ActionsLog](
 	[citizenId] bigint NOT NULL,
 	[actionId] int NOT NULL,
-	[provinceId] int NOT NULL,
+	[districtId] int NOT NULL,
 	[cameraId] int NOT NULL,
 	[accuracy] float NOT NULL,
 	[occurenceTime] dateTime NOT NULL
@@ -101,15 +100,15 @@ GO
 --ADD FOREIGN KEYS--
 --CAMERAS FOREIGN KEYS
 ALTER TABLE [dbo].[Cameras]
-   ADD CONSTRAINT FK_camera_provinceId FOREIGN KEY (provinceId)
-      REFERENCES Provinces (provinceId)
+   ADD CONSTRAINT FK_camera_districtId FOREIGN KEY (districtId)
+      REFERENCES Districts (districtId)
 ;
 GO
 
 --CITIZENS FOREIGN KEYS
 ALTER TABLE [dbo].Citizens
-   ADD CONSTRAINT FK_citizen_provinceId FOREIGN KEY (provinceId)
-      REFERENCES Provinces (provinceId)
+   ADD CONSTRAINT FK_citizen_districtId FOREIGN KEY (districtId)
+      REFERENCES Districts (districtId)
 	,CONSTRAINT FK_citizen_occupationId FOREIGN KEY (occupationId)
       REFERENCES Occupations (occupationId)
 ;
@@ -119,8 +118,8 @@ GO
 
 --ACTION LOGS FOREIGN KEYS
 ALTER TABLE [dbo].ActionsLog
-   ADD CONSTRAINT FK_actionLog_provinceId FOREIGN KEY (provinceId)
-      REFERENCES Provinces (provinceId),
+   ADD CONSTRAINT FK_actionLog_districtId FOREIGN KEY (districtId)
+      REFERENCES Districts (districtId),
 	  CONSTRAINT FK_actionLog_citizenId FOREIGN KEY (citizenId)
       REFERENCES Citizens (citizenId),
 	  CONSTRAINT FK_actionLog_actionId FOREIGN KEY (actionId)
@@ -130,20 +129,24 @@ ALTER TABLE [dbo].ActionsLog
 ;
 GO
 
---MOCK PROVINCE DATA
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Rohun',125444, 123112)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Arcadia', 20909, 344543)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Senestra', 743, 1283)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Slum Town', 201, 39293)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Fictional City Name', 1291, 94843)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Definitely Not China', 83832, 38283)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Haven', 2029, 82382)
-INSERT [dbo].[Provinces] ([provinceName], [population], [size]) VALUES (N'Slimp', 2099, 1000)
+--MOCK DISTRICT DATA
+INSERT INTO [dbo].[Districts] (districtName, size)
+    VALUES
+        ('Redlake', 4736.43),
+        ('Wellmage', 4656.88),
+        ('Riverburn', 2611.84),
+        ('Grasslyn', 1629.06),
+        ('Norcliff', 2335.32),
+        ('Aelwynne', 9056.03),
+        ('Goldcrest', 4831.25),
+        ('Woodgriffin', 7649.01),
+        ('Coldmoor', 5194.25),
+        ('Mormead', 2235.41)
 GO
 
 --MOCK CAMERA DATA
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [latitude],[longitude]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), 32.5, 32.5)
-INSERT [dbo].[Cameras] ([provinceId], [lastMaintenceDate], [latitude], [longitude]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), 32.6, 32.7)
+INSERT [dbo].[Cameras] ([districtId], [lastMaintenceDate], [latitude],[longitude]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), 32.5, 32.5)
+INSERT [dbo].[Cameras] ([districtId], [lastMaintenceDate], [latitude], [longitude]) VALUES (3, convert(datetime,'21-02-12 6:10:00 PM',5), 32.6, 32.7)
 GO
 
 --MOCK OCCUPATION DATA
@@ -159,7 +162,7 @@ INSERT [dbo].[Citizens]([citizenId],
 	[lastName],
 	[dateOfBirth],
 	[gender],
-	[provinceId],
+	[districtId],
 	[occupationId],
 	[addressLine1],
 	[addressLine2],
@@ -174,5 +177,5 @@ INSERT [dbo].[Actions]([actionName], [actionDescription], [score]) VALUES ('Murd
 GO
 
 --MOCK ACTION LOG DATA 
-INSERT [dbo].[ActionsLog](citizenId, actionId, provinceId, cameraId, accuracy, occurenceTime) VALUES (8928282818, 1, 3, 1, 98.3, CURRENT_TIMESTAMP)
+INSERT [dbo].[ActionsLog](citizenId, actionId, districtId, cameraId, accuracy, occurenceTime) VALUES (8928282818, 1, 3, 1, 98.3, CURRENT_TIMESTAMP)
 GO
