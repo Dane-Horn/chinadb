@@ -49,8 +49,7 @@ CREATE TABLE [dbo].[Citizens](
 	[occupationId] int NOT NULL,
 	[addressLine1] varchar(200) NULL,
 	[addressLine2] varchar(200) NULL,
-	[addressLine3] varchar(200) NULL,
-	[score] float NULL DEFAULT 0.00
+	[score] float NOT NULL DEFAULT 0.00
 );
 GO
 
@@ -260,19 +259,19 @@ INSERT INTO [dbo].[Occupations] (importance, occupationName, occupationDescripti
 GO
 
 --MOCK PERSON DATA
-INSERT INTO [dbo].[Citizens] (citizenId, firstName, lastName, dateOfBirth, gender, districtId, occupationId, addressLine1, addressLine2, addressLine3)
+INSERT INTO [dbo].[Citizens] (citizenId, firstName, lastName, dateOfBirth, gender, districtId, occupationId, addressLine1, addressLine2)
     VALUES
-        (1519059975720, 'Amanda', 'Dunn', '1999-07-05', 'male', 4, 91, '01503', 'Barbara Mountains', 'Apt. 860'),
-        (3091774157548, 'Tristan', 'Jimenez', '1983-12-19', 'female', 14, 79, '92870', 'Powell Mountains', 'Suite 239'),
-        (6105928435090, 'Maria', 'Reed', '1978-06-30', 'male', 8, 98, '45464', 'Chapman Route', 'Suite 761'),
-        (3860281599910, 'Kristy', 'Ward', '1985-06-27', 'female', 8, 77, '23792', 'Barbara Causeway', 'Apt. 492'),
-        (7731491866877, 'Micheal', 'Hansen', '2003-01-09', 'male', 7, 44, '43516', 'Santos Landing', 'Apt. 926'),
-        (7378087263845, 'Nancy', 'Lee', '2019-06-14', 'male', 8, 21, '11930', 'Phillips Cliff', 'Apt. 301'),
-        (7727308487395, 'James', 'Quinn', '1973-10-28', 'female', 15, 23, '59009', 'Cardenas Plains', 'Apt. 167'),
-        (6011379470054, 'Jerry', 'Skinner', '2012-03-26', 'male', 13, 96, '84557', 'Lopez Hill', 'Apt. 448'),
-        (9278157916469, 'Lindsey', 'Parker', '2007-10-09', 'female', 4, 2, '72639', 'Hayes Expressway', 'Apt. 044'),
-        (1479333450285, 'Jasmine', 'Clark', '2012-07-17', 'male', 15, 29, '39914', 'Courtney Lodge', 'Suite 204'), 
-		(8928282818, 'Keanu', 'Teixeira', '1996-07-09', 'male', 3, 1, '12', '6th Street', 'Bloom')
+        (1519059975720, 'Amanda', 'Dunn', '1999-07-05', 'male', 4, 91, '01503', 'Barbara Mountains Apt. 860'),
+        (3091774157548, 'Tristan', 'Jimenez', '1983-12-19', 'female', 14, 79, '92870', 'Powell Mountains Suite 239'),
+        (6105928435090, 'Maria', 'Reed', '1978-06-30', 'male', 8, 98, '45464', 'Chapman Route Suite 761'),
+        (3860281599910, 'Kristy', 'Ward', '1985-06-27', 'female', 8, 77, '23792', 'Barbara Causeway Apt. 492'),
+        (7731491866877, 'Micheal', 'Hansen', '2003-01-09', 'male', 7, 44, '43516', 'Santos Landing Apt. 926'),
+        (7378087263845, 'Nancy', 'Lee', '2019-06-14', 'male', 8, 21, '11930', 'Phillips Cliff Apt. 301'),
+        (7727308487395, 'James', 'Quinn', '1973-10-28', 'female', 15, 23, '59009', 'Cardenas Plains Apt. 167'),
+        (6011379470054, 'Jerry', 'Skinner', '2012-03-26', 'male', 13, 96, '84557', 'Lopez Hill Apt. 448'),
+        (9278157916469, 'Lindsey', 'Parker', '2007-10-09', 'female', 4, 2, '72639', 'Hayes Expressway Apt. 044'),
+        (1479333450285, 'Jasmine', 'Clark', '2012-07-17', 'male', 15, 29, '39914', 'Courtney LodgeSuite 204'), 
+		(8928282818, 'Keanu', 'Teixeira', '1996-07-09', 'male', 3, 1, '12', '6th Street Bloom')
 GO
 
 --MOCK ACTION DATA
