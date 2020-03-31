@@ -1,6 +1,9 @@
 USE SurveillenceDB
 GO
 
+DROP PROCEDURE [dbo].usp_insertCitizen;  
+GO
+
 CREATE PROCEDURE [dbo].usp_insertCitizen
 @pCitizenID bigint,
 @pFirstName varchar(100),
