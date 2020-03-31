@@ -14,8 +14,7 @@ GO
 CREATE TABLE [dbo].[Districts](
     [districtId] int IDENTITY(1,1) NOT NULL,
 	[districtName] varchar(100) NOT NULL,
-	[size] float NOT NULL,
-    [population] int DEFAULT 0,
+	[size] float NOT NULL
 );
 GO
 
