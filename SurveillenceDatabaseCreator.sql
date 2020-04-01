@@ -89,7 +89,6 @@ GO
 CREATE TABLE [dbo].[ActionsLog](
 	[citizenId] bigint NOT NULL,
 	[actionId] int NOT NULL,
-	[districtId] int NOT NULL,
 	[cameraId] int NOT NULL,
 	[accuracy] float NOT NULL,
 	[occurenceTime] dateTime NOT NULL
@@ -117,9 +116,7 @@ GO
 
 --ACTION LOGS FOREIGN KEYS
 ALTER TABLE [dbo].ActionsLog
-   ADD CONSTRAINT FK_actionLog_districtId FOREIGN KEY (districtId)
-      REFERENCES Districts (districtId),
-	  CONSTRAINT FK_actionLog_citizenId FOREIGN KEY (citizenId)
+	  ADD CONSTRAINT FK_actionLog_citizenId FOREIGN KEY (citizenId)
       REFERENCES Citizens (citizenId),
 	  CONSTRAINT FK_actionLog_actionId FOREIGN KEY (actionId)
       REFERENCES Actions (actionId),
@@ -280,5 +277,5 @@ INSERT [dbo].[Actions]([actionName], [actionDescription], [score]) VALUES ('Murd
 GO
 
 --MOCK ACTION LOG DATA 
-INSERT [dbo].[ActionsLog](citizenId, actionId, districtId, cameraId, accuracy, occurenceTime) VALUES (8928282818, 1, 3, 1, 98.3, CURRENT_TIMESTAMP)
+INSERT [dbo].[ActionsLog](citizenId, actionId, cameraId, accuracy, occurenceTime) VALUES (8928282818, 1, 1, 98.3, CURRENT_TIMESTAMP)
 GO
