@@ -23,5 +23,4 @@ def generateActionLogs(n=100):
             'accuracy':accuracy,
             'occurenceTime':occurenceTime,
         })
-    print(actionsLogs)
     return actionsLogs

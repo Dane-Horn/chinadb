@@ -5,12 +5,12 @@ from cameras import generateCameras
 from actionLogs import generateActionLogs
 from insert import generateInsert
 from actions import generateActions
-districts = generateDistricts(15)
-occupations = generateOccupations(50)
-citizens = generateCitizens(100)
-cameras = generateCameras(20)
+districts = generateDistricts(50)
+occupations = generateOccupations(100)
+citizens = generateCitizens(1000)
+cameras = generateCameras(200)
 actions = generateActions()
-actionLogs = generateActionLogs(500)
+actionLogs = generateActionLogs(10000)
 generateInsert(districts, 'districts')
 generateInsert(occupations, 'occupations')
 generateInsert(cameras, 'cameras')
