@@ -31,3 +31,17 @@ inner join dbo.ActionsLog al
 on al.citizenId = c.citizenId
 group by o.occupationName
 GO
+
+CREATE OR ALTER VIEW vMostActionsPerCamera AS
+SELECT a.cameraID, a.actionID, act.actionName, Count(a.actionID) Occurences
+FROM ActionsLog a, Actions act
+WHERE a.actionID = act.actionID
+GROUP BY a.cameraID, a.actionID, act.actionName, a.actionID
+HAVING Count(a.actionID) >= ALL (
+		SELECT COUNT(a1.actionID) Occ
+		FROM ActionsLog a1, Actions act1
+		WHERE a1.actionID = act1.actionID AND a1.cameraID = a.cameraID
+		GROUP BY a1.cameraID, a1.actionID, act1.actionName
+	)
+ORDER BY a.cameraID, a.actionID, Occurences DESC
+GO
