@@ -44,7 +44,7 @@ CREATE TABLE [dbo].[Citizens](
 	[firstName] varchar(100) NOT NULL,
 	[lastName] varchar(100) NOT NULL,
 	[dateOfBirth] date NOT NULL,
-	[gender] varchar(25) NOT NULL,
+	[gender] varchar(200) NOT NULL,
 	[districtId] int NOT NULL,
 	[occupationId] int NOT NULL,
 	[addressLine1] varchar(200) NULL,
