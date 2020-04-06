@@ -44,13 +44,12 @@ CREATE TABLE [dbo].[Citizens](
 	[firstName] varchar(100) NOT NULL,
 	[lastName] varchar(100) NOT NULL,
 	[dateOfBirth] date NOT NULL,
-	[gender] varchar(200) NOT NULL,
+	[gender] varchar(25) NOT NULL,
 	[districtId] int NOT NULL,
 	[occupationId] int NOT NULL,
 	[addressLine1] varchar(200) NULL,
 	[addressLine2] varchar(200) NULL,
-	[addressLine3] varchar(200) NULL,
-	[score] float NULL DEFAULT 0.00
+	[score] float NOT NULL DEFAULT 0.00
 );
 GO
 
