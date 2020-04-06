@@ -47,3 +47,19 @@ WHERE @citizenId = [Citizens].citizenId
 
 END
 GO
+
+DROP PROCEDURE [dbo].usp_MarkCitizen;  
+GO  
+
+CREATE PROCEDURE [dbo].usp_MarkCitizen  
+    @citizenId bigint,
+	@markId int
+AS   
+BEGIN
+SET NOCOUNT ON;  
+UPDATE [dbo].[Citizens] 
+SET markId = @markId
+WHERE @citizenId = [Citizens].citizenId
+
+END
+GO
