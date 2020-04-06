@@ -47,6 +47,7 @@ CREATE TABLE [dbo].[Citizens](
 	[gender] varchar(200) NOT NULL,
 	[districtId] int NOT NULL,
 	[occupationId] int NOT NULL,
+	[markId] int NOT NULL,
 	[addressLine1] varchar(200) NULL,
 	[addressLine2] varchar(200) NULL,
 	[score] float NOT NULL DEFAULT 0.00
