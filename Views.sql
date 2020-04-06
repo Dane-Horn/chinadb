@@ -13,13 +13,9 @@ GROUP BY d.districtName
 GO
 
 create or alter view vScorePerOccupation AS
-select o.occupationName as 'Occupation', SUM(a.score) as 'Total score' from dbo.Occupations o
+select o.occupationName as 'Occupation', SUM(c.score) as 'Total score' from dbo.Occupations o
 inner join dbo.Citizens c
 on c.occupationId = o.occupationId
-inner join dbo.ActionsLog al
-on al.citizenId = c.citizenId
-inner join dbo.Actions a
-on al.actionId = a.actionId
 group by o.occupationName
 GO
 
