@@ -33,12 +33,13 @@ def generateCitizens(n=500):
             citizens.append({
                 'citizenId': id,
                 'firstName': firstName,
-                'secondName': lastName,
+                'lastName': lastName,
                 'dateOfBirth': dob,
                 'gender': gender,
                 'districtId': districtId,
                 'occupationId': occupationId,
                 'addressLine1': addressLine1,
-                'addressLine2': addressLine2
+                'addressLine2': addressLine2,
+                'score': 0
             })
     return citizens

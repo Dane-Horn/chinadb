@@ -13,3 +13,16 @@ def generateInsert(entries, name, removeId=True):
         for entry in entries[i:i+1000]:
             output += f"\t{ tuple(entry.values()) },\n"
         print(output[:-2])
+
+
+def generateCitizenInsert(citizens):
+    output = ""
+    for citizen in citizens:
+        output += f'EXEC usp_insertCitizen {str(tuple(citizen.values()))[1:-1]}\n'
+    print(output[:-1])
+
+def generateActionLogInsert(actionLogs):
+    output = ""
+    for actionLog in actionLogs:
+        output += f'EXEC usp_AddActionToLog {str(tuple(actionLog.values()))[1:-1]}\n'
+    print(output[:-1])

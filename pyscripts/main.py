@@ -3,7 +3,7 @@ from occupations import generateOccupations
 from districts import generateDistricts
 from cameras import generateCameras
 from actionLogs import generateActionLogs
-from insert import generateInsert
+from insert import generateInsert, generateCitizenInsert, generateActionLogInsert
 from actions import generateActions
 districts = generateDistricts(50)
 occupations = generateOccupations(100)
@@ -14,6 +14,6 @@ actionLogs = generateActionLogs(10000)
 generateInsert(districts, 'districts')
 generateInsert(occupations, 'occupations')
 generateInsert(cameras, 'cameras')
-generateInsert(citizens, 'citizens', removeId=False)
+generateCitizenInsert(citizens)
 generateInsert(actions, 'actions')
-generateInsert(actionLogs, 'actionsLog', removeId=False)
+generateActionLogInsert(actionLogs)
