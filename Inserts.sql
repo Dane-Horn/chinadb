@@ -136,7 +136,6 @@
 	(8, 'Accountant, chartered management', 'Just hundred late within them speech own mouth.'),
 	(-6, 'Exercise physiologist', 'Hard test southern knowledge argue this picture economy defense.'),
 	(-1, 'Customer service manager', 'Rich thought agreement do several close learn your ten exactly these just along.'),
-	(-3, "Politician's assistant", 'Change Democrat middle strong also information.'),
 	(-5, 'Health and safety adviser', 'Paper situation trouble happy police stage north business small same each modern including.'),
 	(0, 'Neurosurgeon', 'Hold cause party teacher job mean bill activity claim everyone book choose.'),
 	(-5, 'Museum/gallery curator', 'And situation pass argue commercial hour no.'),
