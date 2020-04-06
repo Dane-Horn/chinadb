@@ -43,5 +43,4 @@ HAVING Count(a.actionID) >= ALL (
 		WHERE a1.actionID = act1.actionID AND a1.cameraID = a.cameraID
 		GROUP BY a1.cameraID, a1.actionID, act1.actionName
 	)
-ORDER BY a.cameraID, a.actionID, Occurences DESC
 GO
