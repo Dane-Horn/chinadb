@@ -28,9 +28,8 @@ def generateCitizens(n=500):
             occupations)['occupationId'] for _ in range(n)]
         citizen_addressLine1s = [fake.zipcode() for _ in range(n)]
         citizen_addressLine2s = [fake.street_name() for _ in range(n)]
-        citizen_addressLine3s = [fake.secondary_address() for _ in range(n)]
 
-        for id, firstName, lastName, dob, gender, districtId, occupationId, addressLine1, addressLine2, addressLine3 in zip(citizen_ids, citizen_firstNames, citizen_lastNames, citizen_dobs, citizen_genders, citizen_districtIds, citizen_occupationIds, citizen_addressLine1s, citizen_addressLine2s, citizen_addressLine3s):
+        for id, firstName, lastName, dob, gender, districtId, occupationId, addressLine1, addressLine2 in zip(citizen_ids, citizen_firstNames, citizen_lastNames, citizen_dobs, citizen_genders, citizen_districtIds, citizen_occupationIds, citizen_addressLine1s, citizen_addressLine2s):
             citizens.append({
                 'citizenId': id,
                 'firstName': firstName,
@@ -40,7 +39,6 @@ def generateCitizens(n=500):
                 'districtId': districtId,
                 'occupationId': occupationId,
                 'addressLine1': addressLine1,
-                'addressLine2': addressLine2,
-                'addressLine3': addressLine3,
+                'addressLine2': addressLine2
             })
     return citizens
