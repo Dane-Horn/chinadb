@@ -1,4 +1,10 @@
-
+	INSERT INTO [dbo].[Markers] (description, importance)
+        VALUES
+        	('Alive', 1),
+	('Dead', -1),
+	('Exiled', 5),
+	('Executed', -5)
+	
         INSERT INTO [dbo].[Districts] (districtName, size)
         VALUES
         	('Kingston', 8672.1),
