@@ -72,6 +72,18 @@ ALTER TABLE dbo.Occupations
 	ADD CONSTRAINT [PK_occupationId] PRIMARY KEY CLUSTERED ([occupationId] ASC);
 GO
 
+--MARKERS TABLE
+CREATE TABLE [dbo].[Markers](
+	[markerId] int IDENTITY(1,1) NOT NULL,
+	[markerDescription] varchar(1000) NULL,
+	[importance] float NOT NULL,
+);
+GO
+
+ALTER TABLE dbo.Markers
+	ADD CONSTRAINT [PK_markerId] PRIMARY KEY CLUSTERED ([markerId] ASC);
+GO
+
 --ACTIONS TABLE
 CREATE TABLE [dbo].[Actions](
 	[actionId] int IDENTITY(1,1) NOT NULL,
@@ -109,6 +121,8 @@ ALTER TABLE [dbo].Citizens
       REFERENCES Districts (districtId)
 	,CONSTRAINT FK_citizen_occupationId FOREIGN KEY (occupationId)
       REFERENCES Occupations (occupationId)
+	,CONSTRAINT FK_citizen_markerId FOREIGN KEY (markerId)
+      REFERENCES Markers (markerId)
 ;
 
 GO
