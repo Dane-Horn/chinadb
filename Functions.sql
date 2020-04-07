@@ -24,3 +24,18 @@ RETURN (
 	)
 )
 GO
+
+create or alter function dbo.fCamerasToMaintain(
+	@DistrictName varchar(100),
+	@YearLimit int
+)
+returns table
+as 
+return (
+	select c.cameraId, c.longitude, c.latitude, c.lastMaintenanceDate from Districts d
+	inner join Cameras c
+	on c.districtId = d.districtId
+	where d.districtName = @DistrictName
+	and DATEDIFF(year, c.lastMaintenanceDate, CURRENT_TIMESTAMP) > @YearLimit
+)
+
