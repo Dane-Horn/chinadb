@@ -1,11 +1,8 @@
 use SurveillenceDB
 go
 setuser
-drop user police1
-create user police1 without login
-
-drop user maintainer1
-create user maintainer1 without login
+drop user Dane
+create user Dane without login
 
 
 drop role Police
@@ -17,10 +14,7 @@ create role PopulationControl
 drop role Maintenance
 create role Maintenance
 
-alter role Police
-add member police1
-
 alter role Maintenance
-add member maintainer1
+add member Dane
 
-grant select on Citizens to Maintenance;
+grant select on fCamerasToMaintain to Maintenance
