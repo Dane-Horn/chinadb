@@ -59,7 +59,7 @@ AS
 BEGIN
 SET NOCOUNT ON;  
 UPDATE [dbo].[Citizens] 
-SET markId = @markId
+SET markerId = @markId
 WHERE @citizenId = [Citizens].citizenId
 
 END
