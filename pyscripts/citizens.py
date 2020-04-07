@@ -38,6 +38,7 @@ def generateCitizens(n=500):
                 'gender': gender,
                 'districtId': districtId,
                 'occupationId': occupationId,
+                'markerID': 1,
                 'addressLine1': addressLine1,
                 'addressLine2': addressLine2,
                 'score': 0
