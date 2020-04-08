@@ -40,3 +40,16 @@ HAVING Count(a.actionID) >= ALL (
 		GROUP BY a1.cameraID, a1.actionID, act1.actionName
 	)
 GO
+
+CREATE OR ALTER VIEW vCitizensActions AS
+SELECT al.citizenId, c.firstName, c.lastName, o.occupationName AS 'occupation' , a.actionName AS 'action', a.score, d.districtName AS 'actionDistrict' 
+FROM dbo.ActionsLog al
+inner join dbo.Citizens c
+ON al.citizenId = c.citizenId
+inner join dbo.Actions a
+ON al.actionId = a.actionId
+inner join dbo.Occupations o
+ON c.occupationId = o.occupationId
+inner join dbo.Districts d
+ON c.districtId = d.districtId
+GO
