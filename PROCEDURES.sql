@@ -65,10 +65,6 @@ WHERE @citizenId = [Citizens].citizenId
 END
 GO
 
-
-USE SurveillenceDB
-GO
-
 DROP PROCEDURE [dbo].usp_insertCamera;  
 GO
 
