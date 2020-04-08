@@ -115,3 +115,88 @@ END
 DELETE FROM ActionsLog
 WHERE ActionsLog.occurenceTime < @pCutoffDate
 GO
+
+--############################################### Insert occupation
+DROP PROCEDURE [dbo].usp_insertOccupation
+GO
+
+CREATE PROCEDURE [dbo].usp_insertOccupation
+@pOccupationName varchar(100),
+@pOccupationDescription varchar(500),
+@pImportance int
+AS
+INSERT INTO dbo.Occupations(occupationName, occupationDescription, importance)
+VALUES (@pOccupationName, @pOccupationDescription, @pImportance)
+GO
+
+--############################################## Insert Action
+DROP PROCEDURE dbo.usp_insertAction
+GO
+
+CREATE PROCEDURE dbo.usp_insertAction
+@pActionName varchar(100),
+@pActionDescription varchar(500),
+@pScore int
+AS
+INSERT INTO dbo.Actions(actionName, actionDescription, score)
+VALUES (@pActionName, @pActionDescription, @pScore)
+GO
+
+--############################################## Insert District
+DROP PROCEDURE dbo.usp_insertDistrict
+GO
+
+CREATE PROCEDURE dbo.usp_insertDistrict
+@pDistrictName varchar(100),
+@pSize float
+AS
+INSERT INTO dbo.Districts(districtName, size)
+VALUES (@pDistrictName, @pSize)
+GO
+
+--############################################# Insert Markers
+DROP PROCEDURE dbo.usp_insertMarker
+GO
+
+CREATE PROCEDURE dbo.usp_InsertMarker
+@pDescription varchar(100),
+@pImportance int
+AS 
+INSERT INTO dbo.Markers(markerDescription, importance)
+VALUES(@pDescription, @pImportance)
+GO
+
+--########################################### Update Citizen Address
+DROP PROCEDURE dbo.usp_updateCitizenAddress
+GO
+
+
+CREATE PROCEDURE dbo.usp_updateCitizenAddress
+@pCitizenID bigint,
+@pAddressLine1 varchar(200) = NULL,
+@pAddressLine2 varchar(200) = NULL
+AS
+IF @pAddressLine1 IS NOT NULL
+BEGIN
+	UPDATE dbo.Citizens
+	SET addressLine1 = @pAddressLine1
+	WHERE citizenId = @pCitizenID
+END
+IF @pAddressLine2 IS NOT NULL
+BEGIN
+	UPDATE dbo.Citizens
+	SET addressLine2 = @pAddressLine2
+	WHERE citizenId = @pCitizenID
+END
+GO
+
+--######################################### Delete Action
+DROP PROCEDURE dbo.usp_deleteAction
+GO
+
+CREATE PROCEDURE dbo.usp_deleteAction
+@pActionId int
+AS
+DELETE FROM dbo.Actions
+WHERE actionId = @pActionId
+GO
