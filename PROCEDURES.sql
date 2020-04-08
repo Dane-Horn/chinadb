@@ -83,3 +83,15 @@ END
 INSERT INTO [dbo].Cameras (districtId,latitude,longitude,lastMaintenanceDate)
     VALUES (@pDistrictID,@pLatitude,@pLongitude,@pLastMaintenenceDate)
 GO
+
+
+DROP PROCEDURE [dbo].usp_updateCameraMaintenance;  
+GO
+
+CREATE PROCEDURE [dbo].usp_updateCameraMaintenance
+@pCameraID int
+AS
+UPDATE Cameras
+SET Cameras.lastMaintenanceDate = GETDATE()
+WHERE Cameras.cameraId = @pCameraID
+GO
