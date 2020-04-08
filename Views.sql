@@ -42,7 +42,7 @@ HAVING Count(a.actionID) >= ALL (
 GO
 
 CREATE OR ALTER VIEW vCitizensActions AS
-SELECT al.citizenId, c.firstName, c.lastName, o.occupationName AS 'occupation' , a.actionName AS 'action', a.score, d.districtName AS 'actionDistrict' 
+SELECT al.citizenId, c.firstName, c.lastName, o.occupationName AS 'occupation' , a.actionName AS 'action', a.score, d.districtName AS 'actionDistrict', al.occurenceTime as 'timestamp' 
 FROM dbo.ActionsLog al
 inner join dbo.Citizens c
 ON al.citizenId = c.citizenId
