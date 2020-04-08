@@ -1,8 +1,8 @@
 	INSERT INTO [dbo].[Markers] (markerDescription, importance)
         VALUES
         	('Alive', 1),
-	('Dead', -1),
-	('Exiled', 5),
+	('Dead', 0),
+	('Exiled', -3),
 	('Executed', -5)
 	
         
