@@ -1,6 +1,6 @@
 USE SurveillenceDB
 GO
-
+--################################################ Insert Citizen
 DROP PROCEDURE [dbo].usp_insertCitizen;  
 GO
 
@@ -21,6 +21,7 @@ INSERT INTO [dbo].Citizens (citizenId, firstName, lastName, dateOfBirth, gender,
     VALUES (@pCitizenID,@pFirstName,@pLastName,@pDOB,@pGender,@pDistrictID,@pOccupationID,@pMarkerID,@pAddressLine1,@pAddressLine2,@pScore)
 GO
 
+--################################################ Insert ActionsLog Entry
 DROP PROCEDURE [dbo].usp_AddActionToLog;  
 GO  
 
@@ -49,6 +50,7 @@ WHERE @citizenId = [Citizens].citizenId
 END
 GO
 
+--################################################ Update Citizen Mark
 DROP PROCEDURE [dbo].usp_MarkCitizen;  
 GO  
 
@@ -65,6 +67,7 @@ WHERE @citizenId = [Citizens].citizenId
 END
 GO
 
+--################################################  Insert Camera
 DROP PROCEDURE [dbo].usp_insertCamera;  
 GO
 
@@ -84,7 +87,7 @@ INSERT INTO [dbo].Cameras (districtId,latitude,longitude,lastMaintenanceDate)
     VALUES (@pDistrictID,@pLatitude,@pLongitude,@pLastMaintenenceDate)
 GO
 
-
+--################################################ Update Camera Maintenance Date
 DROP PROCEDURE [dbo].usp_updateCameraMaintenance;  
 GO
 
@@ -96,7 +99,7 @@ SET Cameras.lastMaintenanceDate = GETDATE()
 WHERE Cameras.cameraId = @pCameraID
 GO
 
-
+--################################################ Delete Old ActionsLog Entries
 DROP PROCEDURE [dbo].usp_deleteOldActionsLogs;  
 GO
 
@@ -111,5 +114,4 @@ END
 
 DELETE FROM ActionsLog
 WHERE ActionsLog.occurenceTime < @pCutoffDate
-
 GO

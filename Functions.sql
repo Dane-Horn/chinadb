@@ -1,7 +1,7 @@
 use master;
 use SurveillenceDB;
 GO
-
+--################################################ Most Actions between Dates
 CREATE OR ALTER FUNCTION dbo.fMostActionsBetweenDates(
     @StartDate Date,
 	@EndDate Date )
@@ -25,6 +25,7 @@ RETURN (
 )
 GO
 
+--################################################ Find Cameras needing Maintenance
 create or alter function dbo.fCamerasToMaintain(
 	@DistrictName varchar(100),
 	@YearLimit int
@@ -40,6 +41,7 @@ return (
 )
 GO
 
+--################################################ Calculate District Score
 create or alter function dbo.fCalculateDistrictScore(
 	@districtId int
 )
