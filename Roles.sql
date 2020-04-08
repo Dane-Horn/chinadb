@@ -27,6 +27,9 @@ create role Government
 drop role Police
 create role Police
 
+drop role PoliceCaptain
+create role PoliceCaptain
+
 drop role SuperUser
 create role SuperUser
 
@@ -42,15 +45,23 @@ add member ElPresidente
 
 grant control on DATABASE::SurveillenceDB to GodUser
 
-
 ------Permissions->USP------
+grant execute on schema :: dbo to SuperUser
 
 grant execute on usp_AddActionToLog to Police
+grant execute on usp_updateCameraMaintenance to Police
+
+grant execute on usp_AddActionToLog to PoliceCaptain
+grant execute on usp_deleteOldActionsLogs to PoliceCaptain
+grant execute on usp_insertCamera to PoliceCaptain
+grant execute on usp_updateCameraMaintenance to PoliceCaptain
+
 grant execute on usp_insertCitizen to Government
-grant execute on usp_MarkCitizen to SuperUser
+grant execute on usp_MarkCitizen to Government
+grant execute on usp_updateCitizenAddress to Government
 
 ------Permissions->Tables------
---need to add other CRUD operations either here or in USP
+
 grant select, insert, update, delete  on schema :: dbo to SuperUser
 
 ------Permissions->Views------
@@ -60,13 +71,13 @@ grant select on vPopulationPerDistrict to Government
 grant select on vScorePerDistrict to Government
 grant select on vScorePerOccupation to Government
 
-grant select on vActionsPerOccupation to Police
-grant select on vCitizensActions to Police
-grant select on vMostActionsPerCamera to Police
+grant select on vActionsPerOccupation to Police, PoliceCaptain
+grant select on vCitizensActions to Police, PoliceCaptain
+grant select on vMostActionsPerCamera to Police, PoliceCaptain
 
 ------Permissions->Functions------
-grant select on fCamerasToMaintain to Government
-grant select on fMostActionsBetweenDates to Government
+grant select on fCamerasToMaintain to Police, PoliceCaptain
+grant select on fMostActionsBetweenDates to Police, PoliceCaptain
 
 
 
