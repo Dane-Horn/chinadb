@@ -38,6 +38,7 @@ return (
 	where d.districtName = @DistrictName
 	and DATEDIFF(year, c.lastMaintenanceDate, CURRENT_TIMESTAMP) > @YearLimit
 )
+GO
 
 create or alter function dbo.fCalculateDistrictScore(
 	@districtId int
@@ -57,3 +58,22 @@ declare @citizenScore float
 
 RETURN @citizenScore
 END
+GO
+
+
+DROP FUNCTION fCalculatePopulationDensity;
+GO
+
+CREATE FUNCTION fCalculatePopulationDensity (@pDistrictID Int)
+  RETURNS int
+AS
+  BEGIN
+    DECLARE @vPopDensity int;
+
+	select @vPopDensity = (SELECT COUNT(c.districtId)
+		FROM Citizens c, Districts d
+		WHERE c.districtId = d.districtId AND d.districtId = @pDistrictID)
+
+	RETURN(@vPopDensity)
+  END
+GO
