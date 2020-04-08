@@ -95,3 +95,21 @@ UPDATE Cameras
 SET Cameras.lastMaintenanceDate = GETDATE()
 WHERE Cameras.cameraId = @pCameraID
 GO
+
+
+DROP PROCEDURE [dbo].usp_deleteOldActionsLogs;  
+GO
+
+CREATE PROCEDURE [dbo].usp_deleteOldActionsLogs
+@pCutoffDate date
+AS
+
+IF(@pCutoffDate IS NULL)
+BEGIN
+	set @pCutoffDate = DateAdd(yy, -5, GetDate())
+END
+
+DELETE FROM ActionsLog
+WHERE ActionsLog.occurenceTime < @pCutoffDate
+
+GO
