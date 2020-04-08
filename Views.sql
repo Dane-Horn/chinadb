@@ -1,8 +1,8 @@
 CREATE OR ALTER VIEW vPopulationPerDistrict AS
-SELECT [districtName], COUNT(b.citizenId) population
+SELECT a.districtName, COUNT(b.citizenId) as population, (COUNT(b.citizenId) / a.size) as popDensity
 FROM Districts a, Citizens b
 WHERE a.districtId = b.districtId
-GROUP BY  a.districtName
+GROUP BY  a.districtName, a.size
 GO
 
 CREATE OR ALTER VIEW vScorePerDistrict AS
