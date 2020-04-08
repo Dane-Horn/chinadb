@@ -199,3 +199,4 @@ CREATE PROCEDURE dbo.usp_deleteAction
 AS
 DELETE FROM dbo.Actions
 WHERE actionId = @pActionId
+GO
