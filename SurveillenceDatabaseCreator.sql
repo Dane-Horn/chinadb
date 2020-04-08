@@ -138,7 +138,7 @@ ALTER TABLE [dbo].ActionsLog
 	  ADD CONSTRAINT FK_actionLog_citizenId FOREIGN KEY (citizenId)
       REFERENCES Citizens (citizenId),
 	  CONSTRAINT FK_actionLog_actionId FOREIGN KEY (actionId)
-      REFERENCES Actions (actionId),
+      REFERENCES Actions (actionId) ON DELETE CASCADE,
 	  CONSTRAINT FK_actionLog_cameraId FOREIGN KEY (cameraId)
       REFERENCES Cameras (cameraId)
 ;
