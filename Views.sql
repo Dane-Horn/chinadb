@@ -60,3 +60,8 @@ inner join dbo.Citizens c
 ON c.occupationId = o.occupationId
 GROUP BY o.occupationName
 GO
+
+CREATE OR ALTER VIEW vScorePerDistrict AS
+SELECT d.districtId, d.districtName, dbo.fCalculateDistrictScore(d.districtId) as Score
+from Districts d
+GO
