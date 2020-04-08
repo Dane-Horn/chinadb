@@ -20,8 +20,6 @@ create user Ian without login
 drop user ElPresidente
 create user ElPresidente without login
 ----------------------Roles---------------------------
-drop role BasicUser
-create role BasicUser
 
 drop role Government
 create role Government
