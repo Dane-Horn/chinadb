@@ -64,3 +64,26 @@ WHERE @citizenId = [Citizens].citizenId
 
 END
 GO
+
+
+USE SurveillenceDB
+GO
+
+DROP PROCEDURE [dbo].usp_insertCamera;  
+GO
+
+CREATE PROCEDURE [dbo].usp_insertCamera
+@pDistrictID int,
+@pLatitude float,
+@pLongitude float,
+@pLastMaintenenceDate date
+AS
+
+IF(@pLastMaintenenceDate IS NULL)
+BEGIN
+set @pLastMaintenenceDate = GETDATE()
+END
+
+INSERT INTO [dbo].Cameras (districtId,latitude,longitude,lastMaintenanceDate)
+    VALUES (@pDistrictID,@pLatitude,@pLongitude,@pLastMaintenenceDate)
+GO
