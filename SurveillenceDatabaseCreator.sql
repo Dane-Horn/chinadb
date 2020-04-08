@@ -99,6 +99,7 @@ GO
 
 --ACTIONS LOG TABLE
 CREATE TABLE [dbo].[ActionsLog](
+	[cameraLogId] bigint IDENTITY(1,1) NOT NULL,
 	[citizenId] bigint NOT NULL,
 	[actionId] int NOT NULL,
 	[cameraId] int NOT NULL,

@@ -54,6 +54,27 @@ AS
 		FROM Citizens c, Districts d
 		WHERE c.districtId = d.districtId AND d.districtId = @pDistrictID)
 
+<<<<<<< HEAD
 	RETURN(@vPopDensity)
   END
 GO
+=======
+create or alter function dbo.fCalculateDistrictScore(
+	@districtId int
+)
+RETURNS int
+AS
+BEGIN
+declare @citizenScore float
+
+	select @citizenScore = sum(a.scored)
+	from(
+	SELECT c.score * m.importance * o.importance as scored
+	from Citizens c 
+		left join Markers m on c.markerId = m.markerId
+		left join Occupations o on c.occupationId = o.occupationId
+	where districtId = @districtId) a
+
+RETURN @citizenScore
+END
+>>>>>>> master
