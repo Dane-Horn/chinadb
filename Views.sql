@@ -53,3 +53,10 @@ ON c.occupationId = o.occupationId
 inner join dbo.Districts d
 ON c.districtId = d.districtId
 GO
+
+CREATE or ALTER VIEW vGendersPerOccupation AS
+SELECT o.occupationName AS 'Occupation', SUM(CASE WHEN c.gender = 'male' THEN 1 ELSE 0 END) as 'Males', SUM(CASE WHEN c.gender = 'female' THEN 1 ELSE 0 END) AS 'Females' FROM dbo.Occupations o
+inner join dbo.Citizens c
+ON c.occupationId = o.occupationId
+GROUP BY o.occupationName
+GO
