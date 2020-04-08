@@ -108,6 +108,10 @@ CREATE TABLE [dbo].[ActionsLog](
 );
 GO
 
+ALTER TABLE dbo.ActionsLog
+	ADD CONSTRAINT [PK_actionId] PRIMARY KEY CLUSTERED ([cameraLogId] ASC);
+GO
+
 --ADD FOREIGN KEYS--
 --CAMERAS FOREIGN KEYS
 ALTER TABLE [dbo].[Cameras]
