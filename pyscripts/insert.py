@@ -19,10 +19,38 @@ def generateCitizenInsert(citizens):
     output = ""
     for citizen in citizens:
         output += f'EXEC usp_insertCitizen {str(tuple(citizen.values()))[1:-1]}\n'
-    print(output[:-1])
+    print(output)
 
 def generateActionLogInsert(actionLogs):
     output = ""
     for actionLog in actionLogs:
         output += f'EXEC usp_AddActionToLog {str(tuple(actionLog.values()))[1:-1]}\n'
-    print(output[:-1])
+    print(output)
+
+def generateDistrictInsert(districts):
+    output = ""
+    for district in districts:
+        del district['districtId']
+        output += f'EXEC usp_InsertDistrict {str(tuple(district.values()))[1:-1]}\n'
+    print(output)
+
+def generateOccupationInsert(occupations):
+    output = ""
+    for occupation in occupations:
+        del occupation['occupationId']
+        output += f'EXEC usp_InsertOccupation {str(tuple(occupation.values()))[1:-1]}\n'
+    print(output)
+
+def generateCameraInsert(cameras):
+    output = ""
+    for camera in cameras:
+        del camera['cameraId']
+        output += f'EXEC usp_InsertCamera {str(tuple(camera.values()))[1:-1]}\n'
+    print(output)
+
+def generateActionInsert(actions):
+    output = ""
+    for action in actions:
+        del action['actionId']
+        output += f'EXEC usp_InsertAction {str(tuple(action.values()))[1:-1]}\n'
+    print(output)

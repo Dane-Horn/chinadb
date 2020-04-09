@@ -3,17 +3,17 @@ from occupations import generateOccupations
 from districts import generateDistricts
 from cameras import generateCameras
 from actionLogs import generateActionLogs
-from insert import generateInsert, generateCitizenInsert, generateActionLogInsert
+from insert import generateInsert, generateCitizenInsert, generateActionLogInsert, generateDistrictInsert, generateOccupationInsert, generateCameraInsert, generateActionInsert
 from actions import generateActions
 districts = generateDistricts(50)
-occupations = generateOccupations(100)
-citizens = generateCitizens(1000)
-cameras = generateCameras(200)
+occupations = generateOccupations(500)
+citizens = generateCitizens(5000)
+cameras = generateCameras(400)
 actions = generateActions()
-actionLogs = generateActionLogs(10000)
-generateInsert(districts, 'districts')
-generateInsert(occupations, 'occupations')
-generateInsert(cameras, 'cameras')
+actionLogs = generateActionLogs(50000)
+generateDistrictInsert(districts)
+generateOccupationInsert(occupations)
+generateCameraInsert(cameras)
 generateCitizenInsert(citizens)
-generateInsert(actions, 'actions')
+generateActionInsert(actions)
 generateActionLogInsert(actionLogs)

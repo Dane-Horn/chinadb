@@ -18,8 +18,8 @@ def generateOccupations(n=100):
         for id, score, name, description in zip(occupation_ids, occupation_scores, occupation_names, occupation_descriptions):
             occupations.append({
                 'occupationId': id,
-                'importance': score,
                 'occupationName': name,
-                'occupationDescription': description
+                'occupationDescription': description,
+                'importance': score,
             })
     return occupations
